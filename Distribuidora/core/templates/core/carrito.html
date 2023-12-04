@@ -1,0 +1,80 @@
+{% extends 'core/index.html' %}
+
+{% load static %}
+
+<title>{%block title %} Inicio {% endblock %}</title>
+
+{% block head %}
+  <!-- Enlace al archivo CSS externo -->
+  <link rel="stylesheet" href="{% static 'core/css/contact_style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="coffee_section layout_padding">
+        <div class="container">
+            <div class="row">
+               <h1 class="coffee_taital">Tu carrito</h1>
+               <div class="bulit_icon"><img src="{% static 'core/images/bulit-icon.png' %}"></div>
+            </div>
+        </div>
+
+        <style>
+            #carro_p{
+                font-family: 'Viga', sans-serif;
+                margin: 0 60px 0 50px;
+            }
+
+            .boton_regresar{
+                margin-left: 25px;
+            }
+        </style>
+
+        
+            {% if request.user.is_authenticated %}
+                <div class="boton_regresar">
+                    <a href="{% url 'portafolio' %}" class="btn btn-primary btn-block" id="boton_regreso"><span class="boton_regresar"><i class="fa-solid fa-arrow-left"></i></span> Seguir Comprando</a>
+                </div>
+                {% include "carro/widget.html" %}
+            {% else %}
+            <div class="container text-center" id="contenedor20">
+                <div>
+                    <p style="text-align: center;">¡¡INICIA SESIÓN PARA VER TU CARRITO!!</p>
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-block">INICIAR SESION</a>
+                </div>
+            </div>
+            {% endif %}
+        
+    </div>
+
+    <style>
+        #contenedor20 {
+          width: 50%; /* Ancho del contenedor al 50% de la ventana */
+          margin-top: 30px;
+          margin-bottom: 30px;
+          padding: 20px;
+          border: 1px solid white; /* Contorno limpio */
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra suave */
+          text-align: center;
+          transition: box-shadow 0.3s; /* Transición para el efecto hover */
+        }
+  
+        #contenedor20:hover {
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.6); /* Más sombra en hover */
+        }
+
+        #boton_regreso {
+            width: 15%;
+            font-size: 10px;
+        }
+
+        @media (max-width: 767px) {
+            #boton_regreso {
+                width: 40%; 
+                font-size: 8px; 
+                margin-top: 10px; 
+            }
+        }
+      </style>
+
+{% endblock %}
